@@ -1,0 +1,38 @@
+{
+    "name": "gatsby-keystone-store",
+    "description": "A static e-commerce site built with Gatsby + KeystoneJS + Stripe.",
+    "private": true,
+    "version": "5.0.11",
+    "author": "Seth Davis",
+    "repository": "https://github.com/keystonejs/keystone/tree/master/packages/create-keystone-app/example-projects/starter",
+    "homepage": "https://github.com/keystonejs/keystone",
+    "license": "MIT",
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "scripts": {
+        "client": "npm run develop --prefix client",
+        "dev": "concurrently \"npm run keystone:dev\" \"npm run client\"",
+        "keystone:build": "cross-env NODE_ENV=production keystone build",
+        "keystone:create-tables": "cross-env CREATE_TABLES=true keystone create-tables",
+        "keystone:dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
+        "keystone:start": "cross-env NODE_ENV=production keystone start",
+        "plop": "plop"
+    },
+    "dependencies": {
+        "@keystonejs/adapter-mongoose": "^8.1.3",
+        "@keystonejs/app-admin-ui": "^7.0.3",
+        "@keystonejs/app-graphql": "^5.1.8",
+        "@keystonejs/app-static": "^5.1.2",
+        "@keystonejs/auth-password": "^5.1.10",
+        "@keystonejs/fields": "^13.0.0",
+        "@keystonejs/keystone": "^11.1.0",
+        "cross-env": "^7.0.0",
+        "dotenv": "^8.2.0"
+    },
+    "devDependencies": {
+        "concurrently": "^5.2.0",
+        "nodemon": "^2.0.4",
+        "plop": "^2.7.1"
+    }
+}
