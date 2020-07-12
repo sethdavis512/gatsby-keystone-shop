@@ -7,11 +7,11 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import Wrapper from '../components/Wrapper'
 
-const {{ pascalCase name }}Page = () => (
+const AboutPage = () => (
     <Layout>
-        <SEO title="{{ pascalCase name }}" />
+        <SEO title="About" />
         <Hero type="primary">
-            <h1 className="title">{{ sentenceCase name }}</h1>
+            <h1 className="title">About</h1>
         </Hero>
         <Wrapper>
             <Columns>
@@ -27,4 +27,4 @@ const {{ pascalCase name }}Page = () => (
     </Layout>
 );
 
-export default {{ pascalCase name }}Page;
+export default AboutPage;

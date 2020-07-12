@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'gatsby'
 import axios from 'axios'
 
+import Card from '../components/Card'
+import Columns from '../components/Columns'
+import Hero from '../components/Hero'
 import Layout from '../components/Layout'
-import Image from '../components/Image'
 import SEO from '../components/SEO'
+import Wrapper from '../components/Wrapper'
 
-const GET_ALL_PRODUCTS = `
-query GetProducts {
-  allProducts {
-    title,
-    description,
-    price
-  }
-}`
+import { GET_ALL_PRODUCTS } from '../queries/Product'
 
 const IndexPage = () => {
     const [stickers, setStickers] = useState([])
@@ -29,27 +24,31 @@ const IndexPage = () => {
         fetchStickers()
     }, [])
 
+    const mappedCards =
+        stickers &&
+        stickers.map(sticker => (
+            <Card>
+                <Card.Image />
+                <Card.Content
+                    title={sticker.title}
+                    description={sticker.description}
+                />
+            </Card>
+        ))
+
+    const mappedColumns = mappedCards.map(card => (
+        <Columns.Column className="is-3">{card}</Columns.Column>
+    ))
+
     return (
         <Layout>
             <SEO title="Home" />
-            <h1 className="title is-1">Welcome</h1>
-            <p>Welcome to your new Gatsby site.</p>
-            <div className="box">
-                <ul>
-                    {stickers &&
-                        stickers.map(sticker => (
-                            <li>
-                                {sticker.title} :: {sticker.description} :: $
-                                {sticker.price}
-                            </li>
-                        ))}
-                </ul>
-            </div>
-            <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-                <Image />
-            </div>
-            <Link to="/page-2/">Go to page 2</Link> <br />
-            <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+            <Hero type="primary">
+                <h1 className="title">Welcome</h1>
+            </Hero>
+            <Wrapper>
+                <Columns className="is-multiline">{mappedColumns}</Columns>
+            </Wrapper>
         </Layout>
     )
 }

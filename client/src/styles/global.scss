@@ -3,21 +3,13 @@
 
 $primary: #ffbe3d;
 $secondary: #f06543;
-$highlight: lighten($primary, 20%);
-
 $family-sans-serif: 'Montserrat', sans-serif;
 
 $link: $secondary;
 
-// Modal
-$modal-content-width: 1200px;
-
-// Section
-$section-padding: 2rem;
-
-// Table
-$table-row-hover-background-color: $highlight;
-
-$border-radius: 4px;
-
 @import '~bulma/bulma';
+
+.card {
+    overflow: hidden;
+    border-radius: 16px;
+}

@@ -29,7 +29,7 @@ module.exports = function(plop) {
         actions: [
             {
                 type: 'add',
-                path: 'client/src/pages/{{ pascalCase name }}.tsx',
+                path: 'client/src/pages/{{ camelCase name }}.tsx',
                 templateFile: 'plop-templates/gatsby-page.hbs'
             }
         ]

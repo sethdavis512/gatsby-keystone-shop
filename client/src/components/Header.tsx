@@ -1,33 +1,61 @@
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
-import React from 'react'
+import classnames from 'classnames'
 
-const Header = ({ siteTitle = '' }) => (
-    <header
-        style={{
-            background: `rebeccapurple`,
-            marginBottom: `1.45rem`
-        }}
-    >
-        <div
-            style={{
-                margin: `0 auto`,
-                maxWidth: 960,
-                padding: `1.45rem 1.0875rem`
-            }}
-        >
-            <h1 style={{ margin: 0 }}>
-                <Link
-                    to="/"
-                    style={{
-                        color: `white`,
-                        textDecoration: `none`
-                    }}
-                >
-                    {siteTitle}
-                </Link>
-            </h1>
-        </div>
-    </header>
-)
+interface HeaderProps {
+    siteTitle: string
+    isOpen: boolean
+}
+
+const Header: React.FC<HeaderProps> = ({ siteTitle = '' }) => {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleMenuClick = () => setIsOpen(!isOpen)
+
+    const openCondition = {
+        'is-active': isOpen
+    }
+    const burgerClassName = classnames('navbar-burger', openCondition)
+    const menuClassName = classnames('navbar-menu', openCondition)
+
+    return (
+        <header>
+            <nav
+                className="navbar is-dark"
+                role="navigation"
+                aria-label="main navigation"
+            >
+                <div className="container">
+                    <div className="navbar-brand">
+                        <Link className="navbar-item" to="/">
+                            {siteTitle}
+                        </Link>
+                        <a
+                            role="button"
+                            className={burgerClassName}
+                            aria-label="menu"
+                            aria-expanded="false"
+                            onClick={handleMenuClick}
+                        >
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div className={menuClassName}>
+                        <div className="navbar-start"></div>
+                        <div className="navbar-end">
+                            <Link to="/about" className="navbar-item">
+                                About
+                            </Link>
+                            <Link to="/contact" className="navbar-item">
+                                Contact
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    )
+}
 
 export default Header
