@@ -1,6 +1,6 @@
 module.exports = function(plop) {
     plop.setGenerator('keystone list', {
-        description: 'A KeystoneJS list generator',
+        description: 'A KeystoneJS list',
         prompts: [
             {
                 type: 'input',
@@ -18,7 +18,7 @@ module.exports = function(plop) {
     });
 
     plop.setGenerator('gatsby page', {
-        description: 'A Gatsby page generator',
+        description: 'A Gatsby page',
         prompts: [
             {
                 type: 'input',
@@ -31,6 +31,24 @@ module.exports = function(plop) {
                 type: 'add',
                 path: 'client/src/pages/{{ camelCase name }}.tsx',
                 templateFile: 'plop-templates/gatsby-page.hbs'
+            }
+        ]
+    });
+
+    plop.setGenerator('gatsby component', {
+        description: 'A Gatsby component',
+        prompts: [
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Gatsby component name:'
+            }
+        ],
+        actions: [
+            {
+                type: 'add',
+                path: 'client/src/components/{{ pascalCase name }}.tsx',
+                templateFile: 'plop-templates/gatsby-component.hbs'
             }
         ]
     });
