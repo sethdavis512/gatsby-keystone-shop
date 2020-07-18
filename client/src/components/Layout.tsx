@@ -1,21 +1,18 @@
 import React from 'react'
 
+import { GlobalProvider } from './GlobalProvider'
 import Header from './Header'
 import Footer from './Footer'
-import { useSiteMetaData } from '../hooks/useSiteMetaData'
 
-import './layout.css'
 import '../styles/global.scss'
 
 const Layout = ({ children }) => {
-    const { title } = useSiteMetaData()
-
     return (
-        <>
-            <Header siteTitle={title} />
+        <GlobalProvider providerValue={{}}>
+            <Header />
             <main>{children}</main>
             <Footer />
-        </>
+        </GlobalProvider>
     )
 }
 
