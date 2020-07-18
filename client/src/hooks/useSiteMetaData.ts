@@ -6,14 +6,19 @@ export const useSiteMetaData = () => {
             site {
                 siteMetadata {
                     title
+                    menuLinks {
+                        label
+                        url
+                    }
                 }
             }
         }
     `)
 
-    const { title } = data.site.siteMetadata
+    const { menuLinks, title } = data.site.siteMetadata
 
     return {
+        menuLinks,
         title
     }
 }
