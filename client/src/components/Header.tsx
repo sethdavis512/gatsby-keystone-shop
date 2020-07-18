@@ -1,15 +1,24 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import classnames from 'classnames'
+import { useSiteMetaData } from '../hooks/useSiteMetaData'
 
-interface HeaderProps {
-    siteTitle: string
-    isOpen: boolean
-}
+interface HeaderProps {}
 
-const Header: React.FC<HeaderProps> = ({ siteTitle = '' }) => {
+const Header: React.FC<HeaderProps> = () => {
     const [isOpen, setIsOpen] = useState(false)
     const handleMenuClick = () => setIsOpen(!isOpen)
+
+    const { menuLinks, title } = useSiteMetaData()
+    const mappedLinks = menuLinks.map(menuLink => (
+        <Link
+            key={`menu-link-${menuLink.label.toLowerCase()}`}
+            to={menuLink.url}
+            className="navbar-item"
+        >
+            {menuLink.label}
+        </Link>
+    ))
 
     const openCondition = {
         'is-active': isOpen
@@ -27,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle = '' }) => {
                 <div className="container">
                     <div className="navbar-brand">
                         <Link className="navbar-item" to="/">
-                            {siteTitle}
+                            {title}
                         </Link>
                         <a
                             role="button"
@@ -43,14 +52,7 @@ const Header: React.FC<HeaderProps> = ({ siteTitle = '' }) => {
                     </div>
                     <div className={menuClassName}>
                         <div className="navbar-start"></div>
-                        <div className="navbar-end">
-                            <Link to="/about" className="navbar-item">
-                                About
-                            </Link>
-                            <Link to="/contact" className="navbar-item">
-                                Contact
-                            </Link>
-                        </div>
+                        <div className="navbar-end">{mappedLinks}</div>
                     </div>
                 </div>
             </nav>
