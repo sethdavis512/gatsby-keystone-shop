@@ -21,8 +21,12 @@ type CardComponent = {
     Content: React.FC<ContentProps>
 }
 
-const Card: React.FC<CardProps> & CardComponent = ({ children }) => {
-    return <div className="card">{children}</div>
+const Card: React.FC<CardProps> & CardComponent = ({ children, ...rest }) => {
+    return (
+        <div className="card" {...rest}>
+            {children}
+        </div>
+    )
 }
 
 const Image: React.FC<ImageProps> = ({
