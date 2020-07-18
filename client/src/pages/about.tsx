@@ -25,6 +25,6 @@ const AboutPage = () => (
             </Columns>
         </Wrapper>
     </Layout>
-);
+)
 
-export default AboutPage;
+export default AboutPage
