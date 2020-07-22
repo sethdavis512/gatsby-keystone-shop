@@ -21,7 +21,8 @@ const adapterConfig = { mongoUri: process.env.MONGO_URI };
 const keystone = new Keystone({
     name: PROJECT_NAME,
     adapter: new Adapter(adapterConfig),
-    onConnect: process.env.CREATE_TABLES !== 'true' && initialiseData
+    onConnect: process.env.CREATE_TABLES !== 'true' && initialiseData,
+    cookieSecret: process.env.COOKIE_SECRET
 });
 
 // Lists

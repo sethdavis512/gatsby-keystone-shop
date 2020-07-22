@@ -13,7 +13,7 @@
     "scripts": {
         "client": "npm run develop --prefix client",
         "dev": "concurrently \"npm run keystone:dev\" \"npm run client\"",
-        "keystone:build": "cross-env NODE_ENV=production keystone build",
+        "keystone:build": "npm run build --prefix client && cross-env NODE_ENV=production keystone build",
         "keystone:create-tables": "cross-env CREATE_TABLES=true keystone create-tables",
         "keystone:dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
         "keystone:start": "cross-env NODE_ENV=production keystone start",
