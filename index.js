@@ -22,6 +22,9 @@ const keystone = new Keystone({
     name: PROJECT_NAME,
     adapter: new Adapter(adapterConfig),
     onConnect: process.env.CREATE_TABLES !== 'true' && initialiseData,
+    cookie: {
+        secure: true
+    },
     cookieSecret: process.env.COOKIE_SECRET
 });
 
@@ -48,5 +51,8 @@ module.exports = {
             enableDefaultRoute: true,
             authStrategy
         })
-    ]
+    ],
+    configureExpress: app => {
+        app.set('trust proxy', 1);
+    }
 };
