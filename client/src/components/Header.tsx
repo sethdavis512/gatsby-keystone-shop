@@ -52,7 +52,12 @@ const Header: React.FC<HeaderProps> = () => {
                     </div>
                     <div className={menuClassName}>
                         <div className="navbar-start"></div>
-                        <div className="navbar-end">{mappedLinks}</div>
+                        <div className="navbar-end">
+                            {mappedLinks}
+                            <Link to="/cart" className="navbar-item">
+                                Cart
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </nav>
