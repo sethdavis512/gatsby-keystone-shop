@@ -14,6 +14,7 @@ query GetProducts {
 export const GET_PRODUCT = `
 query GetProduct($id: ID!) {
     Product(where: { id: $id }) {
+        id
         title
         description
         image {

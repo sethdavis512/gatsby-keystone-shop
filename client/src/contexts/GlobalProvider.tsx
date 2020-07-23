@@ -1,15 +1,11 @@
-import React, { createContext, ReactNode, useContext } from 'react'
+import React, { createContext, ReactNode } from 'react'
 
 interface GlobalProviderProps {
     children: ReactNode
-    providerValue: any
+    providerValue?: any
 }
 
-const intialContext = {
-    test: 'abc'
-}
-
-export const GlobalContext = createContext(intialContext)
+export const GlobalContext = createContext(undefined)
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({
     children,

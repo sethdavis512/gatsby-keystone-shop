@@ -1,19 +1,22 @@
 import React from 'react'
 
-import { GlobalProvider } from './GlobalProvider'
+import { GlobalProvider } from '../contexts/GlobalProvider'
+import { CartProvider } from '../contexts/CartProvider'
 import Header from './Header'
 import Footer from './Footer'
 
 import '../styles/global.scss'
 
-const Layout = ({ children }) => {
-    return (
-        <GlobalProvider providerValue={{}}>
+const Main = ({ children }) => <main>{children}</main>
+
+const Layout = ({ children }) => (
+    <GlobalProvider>
+        <CartProvider>
             <Header />
-            <main>{children}</main>
+            <Main>{children}</Main>
             <Footer />
-        </GlobalProvider>
-    )
-}
+        </CartProvider>
+    </GlobalProvider>
+)
 
 export default Layout

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import classnames from 'classnames'
 import { useSiteMetaData } from '../hooks/useSiteMetaData'
+import { useCart } from '../hooks/useCart'
 
 interface HeaderProps {}
 
@@ -10,6 +11,9 @@ const Header: React.FC<HeaderProps> = () => {
     const handleMenuClick = () => setIsOpen(!isOpen)
 
     const { menuLinks, title } = useSiteMetaData()
+    const { itemsLength } = useCart()
+    const hasItems = itemsLength > 0
+
     const mappedLinks = menuLinks.map(menuLink => (
         <Link
             key={`menu-link-${menuLink.label.toLowerCase()}`}
@@ -54,9 +58,17 @@ const Header: React.FC<HeaderProps> = () => {
                         <div className="navbar-start"></div>
                         <div className="navbar-end">
                             {mappedLinks}
-                            <Link to="/cart" className="navbar-item">
-                                Cart
-                            </Link>
+                            {hasItems && (
+                                <Link to="/cart" className="navbar-item">
+                                    Cart
+                                    <span
+                                        className="tag is-default"
+                                        style={{ marginLeft: '8px' }}
+                                    >
+                                        {itemsLength}
+                                    </span>
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
