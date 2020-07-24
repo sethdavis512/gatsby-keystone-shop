@@ -12,6 +12,7 @@ const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 // Gatsby Keystone shop imports
 const UserSchema = require('./lists/User.js');
 const ProductSchema = require('./lists/Product.js');
+const PostSchema = require('./lists/Post.js');
 require('dotenv').config();
 
 // App
@@ -31,6 +32,7 @@ const keystone = new Keystone({
 // Lists
 keystone.createList('User', UserSchema);
 keystone.createList('Product', ProductSchema);
+keystone.createList('Post', PostSchema);
 
 // Auth
 const authStrategy = keystone.createAuthStrategy({

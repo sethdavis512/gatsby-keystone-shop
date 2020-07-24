@@ -1,10 +1,11 @@
+import { useContext } from 'react'
+import numeral from 'numeral'
 import {
     addToCartHandler,
     clearCartHandler,
     removeItemHandler,
     removeLineItemHandler
 } from './../contexts/cart/CartActions'
-import { useContext } from 'react'
 import { CartContext } from '../contexts/cart/CartProvider'
 
 export const useCart = () => {
@@ -25,10 +26,19 @@ export const useCart = () => {
         0
     )
 
+    const totalCost = state.items.reduce(
+        (total, currentItem) =>
+            (total += numeral(currentItem.price)
+                .multiply(currentItem.quantity)
+                .value()),
+        0
+    )
+
     return {
         // State
         hasItems: state.items.length > 0,
         items: state.items,
+        totalCost,
         totalQuantity,
 
         // Dispatch

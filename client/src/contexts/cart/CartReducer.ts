@@ -18,7 +18,7 @@ export const CartReducer = (state, { type, payload }) => {
 
             const appendedProduct = {
                 ...payload.product,
-                quantity: 1
+                quantity: payload.quantity
             }
 
             return {

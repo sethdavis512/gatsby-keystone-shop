@@ -6,6 +6,7 @@ import Box from '../components/Box'
 import Wrapper from '../components/Wrapper'
 
 import { useCart } from '../hooks/useCart'
+import { toDollar } from '../utils/utilFunctions'
 
 const CartContainer = () => {
     const {
@@ -14,7 +15,8 @@ const CartContainer = () => {
         items,
         hasItems,
         removeItem,
-        removeLineItem
+        removeLineItem,
+        totalCost
     } = useCart()
 
     const handleClearCart = () => clearCart()
@@ -52,7 +54,7 @@ const CartContainer = () => {
                     </div>
                 </div>
             </td>
-            <td>${item.price}</td>
+            <td>{toDollar(item.price)}</td>
             <td>
                 <Button
                     handleClick={createHandleRemoveLineItem(item.id)}
@@ -65,7 +67,7 @@ const CartContainer = () => {
     return (
         <Wrapper>
             <Columns centered>
-                <Columns.Column>
+                <Columns.Column className="is-8">
                     {hasItems && (
                         <div className="box">
                             <table className="table is-fullwidth">
@@ -79,6 +81,10 @@ const CartContainer = () => {
                                 </thead>
                                 <tbody>{mappedItems}</tbody>
                             </table>
+                            <p>
+                                <strong>Total Cost:</strong>{' '}
+                                {toDollar(totalCost)}
+                            </p>
                         </div>
                     )}
                     {hasItems && (
