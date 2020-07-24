@@ -11,8 +11,7 @@ const Header: React.FC<HeaderProps> = () => {
     const handleMenuClick = () => setIsOpen(!isOpen)
 
     const { menuLinks, title } = useSiteMetaData()
-    const { itemsLength } = useCart()
-    const hasItems = itemsLength > 0
+    const { hasItems, totalQuantity } = useCart()
 
     const mappedLinks = menuLinks.map(menuLink => (
         <Link
@@ -55,21 +54,23 @@ const Header: React.FC<HeaderProps> = () => {
                         </a>
                     </div>
                     <div className={menuClassName}>
-                        <div className="navbar-start"></div>
-                        <div className="navbar-end">
-                            {mappedLinks}
+                        <div className="navbar-start">
+                            <Link to="/shop" className="navbar-item">
+                                Shop
+                            </Link>
                             {hasItems && (
                                 <Link to="/cart" className="navbar-item">
                                     Cart
                                     <span
-                                        className="tag is-default"
+                                        className="tag is-primary is-rounded"
                                         style={{ marginLeft: '8px' }}
                                     >
-                                        {itemsLength}
+                                        {totalQuantity}
                                     </span>
                                 </Link>
                             )}
                         </div>
+                        <div className="navbar-end">{mappedLinks}</div>
                     </div>
                 </div>
             </nav>

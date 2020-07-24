@@ -10,6 +10,7 @@ import SEO from '../components/SEO'
 import Wrapper from '../components/Wrapper'
 
 import TextInput from '../components/TextInput'
+import { Link } from 'gatsby'
 
 const stripePromise = loadStripe(process.env.STRIPE_KEY)
 
@@ -22,6 +23,9 @@ const CheckoutPage = () => (
         <Wrapper>
             <Columns className="is-centered">
                 <Columns.Column className="is-6">
+                    <Link className="button" to="/cart">
+                        Back to Cart
+                    </Link>
                     <Elements stripe={stripePromise}>
                         <form>
                             <div className="box">

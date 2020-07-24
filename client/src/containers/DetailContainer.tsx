@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Button from '../components/Button'
 import Columns from '../components/Columns'
@@ -13,13 +13,14 @@ import { useCart } from '../hooks/useCart'
 const DetailContainer = ({ params }) => {
     const product = useProduct(params.pid)
     const { addToCart } = useCart()
+    const [quantity] = useState(1)
 
     const productImgUrl = getSafe(() => product.image.publicUrl, '')
     const productTitle = getSafe(() => product.title, '')
     const productDescription = getSafe(() => product.description, '')
     const productPrice = getSafe(() => product.price, 0)
 
-    const handleAddToCart = () => addToCart(product.id)
+    const handleAddToCart = () => addToCart(product, quantity)
 
     return (
         <Wrapper>
