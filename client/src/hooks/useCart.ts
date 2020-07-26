@@ -9,17 +9,8 @@ import {
 import { CartContext } from '../contexts/cart/CartProvider'
 
 export const useCart = () => {
+    // State
     const { state, dispatch } = useContext(CartContext)
-
-    const addToCart = (product, quantity) =>
-        dispatch(addToCartHandler(product, quantity))
-
-    const clearCart = () => dispatch(clearCartHandler())
-
-    const removeItem = productId => dispatch(removeItemHandler(productId))
-
-    const removeLineItem = productId =>
-        dispatch(removeLineItemHandler(productId))
 
     const totalQuantity = state.items.reduce(
         (total, currentItem) => (total += currentItem.quantity),
@@ -34,6 +25,17 @@ export const useCart = () => {
         0
     )
 
+    // Actions
+    const addToCart = (product, quantity) =>
+        dispatch(addToCartHandler(product, quantity))
+
+    const clearCart = () => dispatch(clearCartHandler())
+
+    const removeItem = productId => dispatch(removeItemHandler(productId))
+
+    const removeLineItem = productId =>
+        dispatch(removeLineItemHandler(productId))
+
     return {
         // State
         hasItems: state.items.length > 0,
@@ -41,7 +43,7 @@ export const useCart = () => {
         totalCost,
         totalQuantity,
 
-        // Dispatch
+        // Actions
         addToCart,
         clearCart,
         removeItem,

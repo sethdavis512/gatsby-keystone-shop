@@ -22,8 +22,14 @@ const CartContainer = () => {
     const handleClearCart = () => clearCart()
     const createHandleAddToCart = product => () => addToCart(product, 1)
     const createHandleRemoveItem = productId => () => removeItem(productId)
-    const createHandleRemoveLineItem = productId => () =>
-        removeLineItem(productId)
+    const createHandleRemoveLineItem = productId => () => {
+        const shouldRemove = confirm(
+            'Are you sure you want to remove this item?'
+        )
+        if (shouldRemove) {
+            removeLineItem(productId)
+        }
+    }
 
     const mappedItems = items.map(item => (
         <tr key={item.title}>
@@ -46,21 +52,22 @@ const CartContainer = () => {
                             style={{ width: '50px' }}
                         />
                     </div>
-                    <div className="control has-text-right">
+                    <div className="control">
                         <Button
                             handleClick={createHandleAddToCart(item)}
                             text="+"
                         />
                     </div>
+                    <div className="control">
+                        <Button
+                            className="is-danger"
+                            handleClick={createHandleRemoveLineItem(item.id)}
+                            text="X"
+                        />
+                    </div>
                 </div>
             </td>
             <td>{toDollar(item.price)}</td>
-            <td>
-                <Button
-                    handleClick={createHandleRemoveLineItem(item.id)}
-                    text="Remove"
-                />
-            </td>
         </tr>
     ))
 
@@ -81,8 +88,9 @@ const CartContainer = () => {
                                 </thead>
                                 <tbody>{mappedItems}</tbody>
                             </table>
-                            <p>
-                                <strong>Total Cost:</strong>{' '}
+                            <p className="has-text-right">
+                                <strong>Total Cost:</strong>
+                                <br />
                                 {toDollar(totalCost)}
                             </p>
                         </div>

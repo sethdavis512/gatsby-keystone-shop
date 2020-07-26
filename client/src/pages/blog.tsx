@@ -1,11 +1,9 @@
 import React from 'react'
-import { Link } from 'gatsby'
 
-import Columns from '../components/Columns'
 import Hero from '../components/Hero'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
-import Wrapper from '../components/Wrapper'
+import BlogContainer from '../containers/BlogContainer'
 
 const BlogPage = () => (
     <Layout>
@@ -13,18 +11,8 @@ const BlogPage = () => (
         <Hero type="primary">
             <h1 className="title">Blog</h1>
         </Hero>
-        <Wrapper>
-            <Columns>
-                <Columns.Column>
-                    <p>
-                        Your new page.
-                        <br />
-                        <Link to="/">Go Home</Link>
-                    </p>
-                </Columns.Column>
-            </Columns>
-        </Wrapper>
+        <BlogContainer />
     </Layout>
-);
+)
 
-export default BlogPage;
+export default BlogPage
