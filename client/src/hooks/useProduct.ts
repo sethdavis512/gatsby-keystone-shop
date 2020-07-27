@@ -1,23 +1,11 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { getSafe } from './../utils/utilFunctions'
+import { useAxios } from './useAxios'
 import { GET_PRODUCT } from '../queries/Product'
 
 export const useProduct = id => {
-    const [product, setProduct] = useState(null)
+    const response = useAxios(GET_PRODUCT, {
+        id
+    })
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            const results = await axios.post('/admin/api', {
-                query: GET_PRODUCT,
-                variables: {
-                    id
-                }
-            })
-            setProduct(results.data.data.Product)
-        }
-
-        fetchProducts()
-    }, [])
-
-    return product
+    return getSafe(() => response.data.Product, {})
 }

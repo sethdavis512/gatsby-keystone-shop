@@ -30,16 +30,18 @@ const ShopContainer = () => {
             </Link>
         ))
 
-    const mappedColumns = mappedCards.map(card => (
-        <Columns.Column key={getUniqueId('card-column')} className="is-3">
-            {card}
-        </Columns.Column>
-    ))
+    const mappedColumns =
+        mappedCards &&
+        mappedCards.map(card => (
+            <Columns.Column key={getUniqueId('card-column')} className="is-3">
+                {card}
+            </Columns.Column>
+        ))
 
     return (
         <Wrapper>
             <Columns className="is-multiline">
-                <ShowContent show={products.length > 0}>
+                <ShowContent show={products && products.length > 0}>
                     {mappedColumns}
                 </ShowContent>
             </Columns>
