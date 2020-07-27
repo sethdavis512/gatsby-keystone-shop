@@ -6,7 +6,7 @@ interface HeroProps {
     className?: string
     children?: ReactNode
     type?: string
-    size?: string
+    size?: 'medium' | 'large' | 'fullheight'
 }
 
 const Hero: React.FC<HeroProps> = ({
