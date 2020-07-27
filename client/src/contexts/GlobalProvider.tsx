@@ -5,7 +5,10 @@ interface GlobalProviderProps {
     providerValue?: any
 }
 
-export const GlobalContext = createContext(undefined)
+export const GlobalContext = createContext({
+    state: {},
+    dispatch: () => {}
+})
 
 export const GlobalProvider: React.FC<GlobalProviderProps> = ({
     children,

@@ -10,7 +10,12 @@ interface CartProviderProps {
     providerValue?: any
 }
 
-export const CartContext = createContext(undefined)
+export const CartContext = createContext({
+    state: {
+        items: []
+    },
+    dispatch: () => {}
+})
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const initialState = {
