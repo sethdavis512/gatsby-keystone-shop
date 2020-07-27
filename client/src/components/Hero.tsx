@@ -5,7 +5,15 @@ interface HeroProps {
     centered?: boolean
     className?: string
     children?: ReactNode
-    type?: string
+    type?:
+        | 'primary'
+        | 'success'
+        | 'info'
+        | 'link'
+        | 'warning'
+        | 'danger'
+        | 'light'
+        | 'dark'
     size?: 'medium' | 'large' | 'fullheight'
 }
 
