@@ -14,7 +14,7 @@ export const CartContext = createContext({
     state: {
         items: []
     },
-    dispatch: () => {}
+    dispatch: any => {}
 })
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
