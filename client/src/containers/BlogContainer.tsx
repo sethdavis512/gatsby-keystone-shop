@@ -1,20 +1,23 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import Columns from '../components/Columns'
 import Wrapper from '../components/Wrapper'
+import ShowContent from '../components/ShowContent'
+import { usePosts } from '../hooks/usePosts'
 
 const BlogContainer = () => {
+    const posts = usePosts()
+
     return (
         <Wrapper>
-            <Columns>
-                <Columns.Column>
-                    <p>
-                        Your new page.
-                        <br />
-                        <Link to="/">Go Home</Link>
-                    </p>
-                </Columns.Column>
-            </Columns>
+            <ShowContent show={posts.length > 0}>
+                <ul>
+                    {posts.map(p => (
+                        <li key={p.title}>
+                            <h4 className="title is-4">{p.title}</h4>
+                            <p>{p.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </ShowContent>
         </Wrapper>
     )
 }

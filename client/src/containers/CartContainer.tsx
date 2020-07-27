@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import Button from '../components/Button'
-import Columns from '../components/Columns'
 import Box from '../components/Box'
 import Wrapper from '../components/Wrapper'
 
@@ -73,52 +72,48 @@ const CartContainer = () => {
 
     return (
         <Wrapper>
-            <Columns centered>
-                <Columns.Column className="is-8">
-                    {hasItems && (
-                        <div className="box">
-                            <table className="table is-fullwidth">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>{mappedItems}</tbody>
-                            </table>
-                            <p className="has-text-right">
-                                <strong>Total Cost:</strong>
-                                <br />
-                                {toDollar(totalCost)}
-                            </p>
-                        </div>
-                    )}
-                    {hasItems && (
-                        <Box
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between'
-                            }}
-                        >
-                            <div>
-                                <Link className="button" to="/shop">
-                                    Continue Shopping
-                                </Link>{' '}
-                                <Button
-                                    handleClick={handleClearCart}
-                                    text="Clear Cart"
-                                />
-                            </div>
-                            <Link className="button is-success" to="/checkout">
-                                Checkout
-                            </Link>
-                        </Box>
-                    )}
-                    {!hasItems && <p>Cart is empty.</p>}
-                </Columns.Column>
-            </Columns>
+            {hasItems && (
+                <div className="box">
+                    <table className="table is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>{mappedItems}</tbody>
+                    </table>
+                    <p className="has-text-right">
+                        <strong>Total Cost:</strong>
+                        <br />
+                        {toDollar(totalCost)}
+                    </p>
+                </div>
+            )}
+            {hasItems && (
+                <Box
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}
+                >
+                    <div>
+                        <Link className="button" to="/shop">
+                            Continue Shopping
+                        </Link>{' '}
+                        <Button
+                            handleClick={handleClearCart}
+                            text="Clear Cart"
+                        />
+                    </div>
+                    <Link className="button is-success" to="/checkout">
+                        Checkout
+                    </Link>
+                </Box>
+            )}
+            {!hasItems && <p>Cart is empty.</p>}
         </Wrapper>
     )
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Columns from '../../components/Columns'
 import Hero from '../../components/Hero'
 import Layout from '../../components/Layout'
 import SEO from '../../components/SEO'
@@ -15,11 +14,7 @@ const DetailPage = ({ location }) => {
         <Layout>
             <SEO title="Detail" />
             <Hero type="primary">
-                <Columns centered>
-                    <Columns.Column className="is-8">
-                        <h1 className="title">Product Details</h1>
-                    </Columns.Column>
-                </Columns>
+                <h1 className="title">Product Details</h1>
             </Hero>
             <DetailContainer params={params} />
         </Layout>

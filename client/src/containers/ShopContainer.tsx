@@ -39,12 +39,10 @@ const ShopContainer = () => {
         ))
 
     return (
-        <Wrapper>
-            <Columns className="is-multiline">
-                <ShowContent show={products && products.length > 0}>
-                    {mappedColumns}
-                </ShowContent>
-            </Columns>
+        <Wrapper hasColumns={false}>
+            <ShowContent show={products && products.length > 0}>
+                <Columns className="is-multiline">{mappedColumns}</Columns>
+            </ShowContent>
         </Wrapper>
     )
 }

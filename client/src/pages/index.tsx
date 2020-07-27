@@ -1,10 +1,9 @@
 import React from 'react'
 
-import Columns from '../components/Columns'
 import Hero from '../components/Hero'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
-import Wrapper from '../components/Wrapper'
+import IndexContainer from '../containers/IndexContainer'
 
 const IndexPage = () => {
     return (
@@ -13,13 +12,7 @@ const IndexPage = () => {
             <Hero type="primary">
                 <h1 className="title">Welcome</h1>
             </Hero>
-            <Wrapper>
-                <Columns>
-                    <Columns.Column>
-                        <p>Thanks for visiting!</p>
-                    </Columns.Column>
-                </Columns>
-            </Wrapper>
+            <IndexContainer />
         </Layout>
     )
 }
