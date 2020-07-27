@@ -16,7 +16,7 @@
         "create-tables": "cross-env CREATE_TABLES=true keystone create-tables",
         "dev:ks": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
         "dev": "concurrently \"npm run dev:ks\" \"npm run client\"",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm run build",
         "plop": "plop",
         "start": "cross-env NODE_ENV=production keystone start"
     },
