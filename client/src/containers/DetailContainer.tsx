@@ -10,7 +10,14 @@ import Wrapper from '../components/Wrapper'
 import { toDollar } from '../utils/utilFunctions'
 import useCart from '../hooks/useCart'
 
-const DetailContainer = ({ product }) => {
+const defaultProduct = {
+    name: 'Default name',
+    image: '',
+    description: 'A description...',
+    price: 0
+}
+
+const DetailContainer = ({ product = defaultProduct }) => {
     const { addToCart } = useCart()
     const [quantity, setQuantity] = useState(1)
 
