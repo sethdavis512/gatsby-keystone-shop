@@ -6,3 +6,12 @@ query GetPosts {
         description
     }
 }`
+
+export const GET_POST = `
+query GetPost($id: ID!) {
+    Post(where: { id: $id }) {
+        id
+        title
+        content
+    }
+}`

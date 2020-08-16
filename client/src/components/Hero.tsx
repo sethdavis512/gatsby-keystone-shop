@@ -5,8 +5,16 @@ interface HeroProps {
     centered?: boolean
     className?: string
     children?: ReactNode
-    type?: string
-    size?: string
+    type?:
+        | 'primary'
+        | 'success'
+        | 'info'
+        | 'link'
+        | 'warning'
+        | 'danger'
+        | 'light'
+        | 'dark'
+    size?: 'medium' | 'large' | 'fullheight'
 }
 
 const Hero: React.FC<HeroProps> = ({

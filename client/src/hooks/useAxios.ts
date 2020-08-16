@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export const useAxios = (query, variables?) => {
+const useAxios = (query, variables?) => {
     const [response, setResponse] = useState(null)
 
     useEffect(() => {
@@ -18,3 +18,5 @@ export const useAxios = (query, variables?) => {
 
     return response
 }
+
+export default useAxios

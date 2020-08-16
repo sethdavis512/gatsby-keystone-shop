@@ -5,7 +5,9 @@ interface UseParamsType {
     search: string
 }
 
-export const useParams = (location: UseParamsType) => {
+const useParams = (location: UseParamsType) => {
     const [params] = useState(queryString.parse(location.search))
     return params
 }
+
+export default useParams

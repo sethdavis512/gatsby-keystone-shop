@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import numeral from 'numeral'
 
 interface CardProps {
     children: ReactNode
@@ -14,6 +15,7 @@ interface ContentProps {
     children?: ReactNode
     description: string
     title: string
+    price: number
 }
 
 type CardComponent = {
@@ -44,14 +46,31 @@ const Image: React.FC<ImageProps> = ({
 }
 Card.Image = Image
 
-const Content: React.FC<ContentProps> = ({ description, title }) => (
-    <div className="card-content">
-        <div className="content">
-            <p className="title is-4">{title}</p>
-            <p>{description}</p>
+const Content: React.FC<ContentProps> = ({ description, title, price }) => {
+    const formatted = numeral(price / 100).format()
+    const formattedPrice = formatted.split('.')
+
+    return (
+        <div className="card-content">
+            <div className="content">
+                <p className="title is-4">{title}</p>
+                <p className="title is-4">
+                    {formattedPrice[0]}
+                    <span
+                        style={{
+                            fontSize: '.75rem',
+                            position: 'relative',
+                            bottom: '.5rem'
+                        }}
+                    >
+                        {formattedPrice[1]}
+                    </span>
+                </p>
+                <p>{description}</p>
+            </div>
         </div>
-    </div>
-)
+    )
+}
 Card.Content = Content
 
 export default Card

@@ -6,6 +6,7 @@ interface TextInputProps {
     handleChange: any
     id: string
     label: string
+    name: string
     placeholder?: string
     required?: boolean
     srOnly?: boolean
@@ -17,6 +18,7 @@ const TextInput: React.FC<TextInputProps> = ({
     handleChange,
     id,
     label,
+    name,
     placeholder = 'Text',
     required = false,
     srOnly,
@@ -35,12 +37,13 @@ const TextInput: React.FC<TextInputProps> = ({
             )}
             <div className="control">
                 <input
-                    id={id}
                     className="input"
-                    onChange={handleChange}
-                    type="text"
-                    placeholder={placeholder}
                     disabled={disabled}
+                    id={id}
+                    name={name}
+                    onChange={handleChange}
+                    placeholder={placeholder}
+                    type="text"
                     value={value}
                 />
             </div>

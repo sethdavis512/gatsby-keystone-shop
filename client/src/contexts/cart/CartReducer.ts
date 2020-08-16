@@ -7,6 +7,7 @@ export const CartReducer = (state, { type, payload }) => {
                 item => item.id === payload.product.id
             )
 
+            // Update quantity
             if (existingItemIndex > -1) {
                 const newState = {
                     items: [...state.items]
@@ -16,6 +17,7 @@ export const CartReducer = (state, { type, payload }) => {
                 return newState
             }
 
+            // Add new item to cart
             const appendedProduct = {
                 ...payload.product,
                 quantity: payload.quantity

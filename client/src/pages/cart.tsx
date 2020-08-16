@@ -5,13 +5,17 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import CartContainer from '../containers/CartContainer'
 
+import { loadStripe } from '@stripe/stripe-js'
+
+const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
+
 const CartPage = () => (
     <Layout>
         <SEO title="Cart" />
         <Hero type="primary">
             <h1 className="title">Cart</h1>
         </Hero>
-        <CartContainer />
+        <CartContainer stripePromise={stripePromise} />
     </Layout>
 )
 

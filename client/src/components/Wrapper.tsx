@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Columns from '../components/Columns'
 
-const Wrapper = ({ children, hasColumns = true, columnClassName = '' }) => {
+interface WrapperProps {
+    children: ReactNode
+    isCentered?: boolean
+    hasColumns?: boolean
+    columnClassName?: string
+}
+
+const Wrapper: React.FC<WrapperProps> = ({
+    children,
+    isCentered,
+    hasColumns = true,
+    columnClassName = ''
+}) => {
     const wrapperChildren = hasColumns ? (
-        <Columns>
+        <Columns className={`${isCentered && 'is-centered'}`}>
             <Columns.Column className={columnClassName}>
                 {children}
             </Columns.Column>

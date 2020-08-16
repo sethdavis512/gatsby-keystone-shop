@@ -1,13 +1,25 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import numeral from 'numeral'
+
 import Button from '../components/Button'
 import Box from '../components/Box'
 import Wrapper from '../components/Wrapper'
-
-import { useCart } from '../hooks/useCart'
+import useCart from '../hooks/useCart'
 import { toDollar } from '../utils/utilFunctions'
 
-const CartContainer = () => {
+interface LineItemType {
+    id: string
+    quantity: number
+}
+
+interface ProductType extends LineItemType {
+    name: string
+    description: string
+    price: string
+}
+
+const CartContainer = ({ stripePromise }) => {
     const {
         addToCart,
         clearCart,
@@ -29,10 +41,25 @@ const CartContainer = () => {
             removeLineItem(productId)
         }
     }
+    const handleCheckoutClick = async () => {
+        const stripe = await stripePromise
 
-    const mappedItems = items.map(item => (
-        <tr key={item.title}>
-            <td>{item.title}</td>
+        const lineItems = items.map((item: ProductType) => ({
+            price: item.id,
+            quantity: item.quantity
+        }))
+
+        const { error } = await stripe.redirectToCheckout({
+            lineItems,
+            mode: 'payment',
+            successUrl: 'http://localhost:8000/success',
+            cancelUrl: 'http://localhost:8000/cancel'
+        })
+    }
+
+    const mappedItems = items.map((item: ProductType) => (
+        <tr key={item.name}>
+            <td>{item.name}</td>
             <td>
                 <div className="field has-addons">
                     <div className="control">
@@ -66,7 +93,7 @@ const CartContainer = () => {
                     </div>
                 </div>
             </td>
-            <td>{toDollar(item.price)}</td>
+            <td>{numeral(item.price).divide(100).format()}</td>
         </tr>
     ))
 
@@ -108,9 +135,11 @@ const CartContainer = () => {
                             text="Clear Cart"
                         />
                     </div>
-                    <Link className="button is-success" to="/checkout">
-                        Checkout
-                    </Link>
+                    <Button
+                        className="button is-success"
+                        handleClick={handleCheckoutClick}
+                        text="Checkout"
+                    />
                 </Box>
             )}
             {!hasItems && <p>Cart is empty.</p>}

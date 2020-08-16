@@ -13,6 +13,8 @@ const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
 const UserSchema = require('./lists/User.js');
 const ProductSchema = require('./lists/Product.js');
 const PostSchema = require('./lists/Post.js');
+const OrderSchema = require('./lists/Order.js');
+
 require('dotenv').config();
 
 // App
@@ -33,6 +35,7 @@ const keystone = new Keystone({
 keystone.createList('User', UserSchema);
 keystone.createList('Product', ProductSchema);
 keystone.createList('Post', PostSchema);
+keystone.createList('Order', OrderSchema);
 
 // Auth
 const authStrategy = keystone.createAuthStrategy({
