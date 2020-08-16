@@ -1,9 +1,7 @@
-import React, { createContext, ReactNode } from 'react'
-import { useReducer } from 'react'
+import React, { createContext, ReactNode, useReducer, useEffect } from 'react'
 
 import { CartReducer } from './CartReducer'
-import { useLocalStorage } from '../../hooks/useLocalStorage'
-import { useEffect } from 'react'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 interface CartProviderProps {
     children: ReactNode
@@ -12,7 +10,7 @@ interface CartProviderProps {
 
 export const CartContext = createContext({
     state: {
-        items: []
+        items: [{ price: 'price_1HFYb3IomsFBBOwY8u8hMpX4', quantity: 1 }]
     },
     dispatch: any => {}
 })

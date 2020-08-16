@@ -1,8 +1,34 @@
-import { getSafe } from './../utils/utilFunctions'
-import { GET_ALL_PRODUCTS } from '../queries/Product'
-import { useAxios } from './useAxios'
+import { useStaticQuery, graphql } from 'gatsby'
 
-export const useProducts = () => {
-    const response = useAxios(GET_ALL_PRODUCTS)
-    return getSafe(() => response.data.allProducts, [])
+const useProducts = () => {
+    const data = useStaticQuery(graphql`
+        query {
+            allStripePrice {
+                edges {
+                    node {
+                        id
+                        unit_amount
+                        currency
+                        product {
+                            active
+                            id
+                            name
+                            description
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    const products = data.allStripePrice.edges.map(edge => ({
+        id: edge.node.id,
+        name: edge.node.product.name,
+        description: edge.node.product.description,
+        price: edge.node.unit_amount
+    }))
+
+    return [products]
 }
+
+export default useProducts

@@ -1,31 +1,41 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import kebabCase from 'lodash/kebabCase'
 
 import Columns from '../components/Columns'
 import Card from '../components/Card'
 import ShowContent from '../components/ShowContent'
 import Wrapper from '../components/Wrapper'
 import { getUniqueId } from '../utils/utilFunctions'
-import { useProducts } from '../hooks/useProducts'
+import useProducts from '../hooks/useProducts'
+import Button from '../components/Button'
 
 const ShopContainer = () => {
-    const products = useProducts()
+    const [products] = useProducts()
 
     const mappedCards =
         products &&
         products.map(product => (
-            <Link to={`/shop/detail?pid=${product.id}`}>
-                <Card key={`product-key-${product.id}`}>
+            <Link to={`/product/${kebabCase(product.name)}`}>
+                <Card key={`product-key-${kebabCase(product.name)}`}>
                     <Card.Image
                         src={
                             product.image ? product.image.publicUrl : undefined
                         }
                     />
                     <Card.Content
-                        title={product.title}
+                        title={product.name}
                         description={product.description}
                         price={product.price}
                     />
+                    <div className="card-footer">
+                        <div className="card-footer-item">
+                            <Button
+                                className="is-fullwidth"
+                                text="See Details"
+                            />
+                        </div>
+                    </div>
                 </Card>
             </Link>
         ))

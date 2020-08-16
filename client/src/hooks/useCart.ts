@@ -8,7 +8,7 @@ import {
 } from './../contexts/cart/CartActions'
 import { CartContext } from '../contexts/cart/CartProvider'
 
-export const useCart = () => {
+const useCart = () => {
     // State
     const { state, dispatch } = useContext(CartContext)
 
@@ -21,12 +21,13 @@ export const useCart = () => {
         (total, currentItem) =>
             (total += numeral(currentItem.price)
                 .multiply(currentItem.quantity)
+                .divide(100)
                 .value()),
         0
     )
 
     // Actions
-    const addToCart = (product, quantity) =>
+    const addToCart = (product: any, quantity: number) =>
         dispatch(addToCartHandler(product, quantity))
 
     const clearCart = () => dispatch(clearCartHandler())
@@ -50,3 +51,5 @@ export const useCart = () => {
         removeLineItem
     }
 }
+
+export default useCart

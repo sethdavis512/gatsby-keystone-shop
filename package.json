@@ -27,6 +27,7 @@
         "@keystonejs/app-static": "^5.1.2",
         "@keystonejs/auth-password": "^5.1.10",
         "@keystonejs/fields": "^13.0.0",
+        "@keystonejs/fields-markdown": "^5.2.3",
         "@keystonejs/file-adapters": "^7.0.1",
         "@keystonejs/keystone": "^11.1.0",
         "cross-env": "^7.0.0",

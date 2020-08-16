@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import classnames from 'classnames'
-import { useSiteMetaData } from '../hooks/useSiteMetaData'
-import { useCart } from '../hooks/useCart'
+import useSiteMetaData from '../hooks/useSiteMetaData'
+import useCart from '../hooks/useCart'
 
 interface HeaderProps {}
 

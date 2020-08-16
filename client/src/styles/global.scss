@@ -35,3 +35,10 @@ $link: $secondary;
         transform: rotate(360deg);
     }
 }
+
+.StripeElement {
+    border: 2px solid $grey-lightest;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}

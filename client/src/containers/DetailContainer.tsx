@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { navigate } from 'gatsby'
 
 import Button from '../components/Button'
 import Columns from '../components/Columns'
@@ -6,14 +7,10 @@ import Panel from '../components/Panel'
 import ShowContent from '../components/ShowContent'
 import Wrapper from '../components/Wrapper'
 
-import { getSafe, toDollar } from '../utils/utilFunctions'
-import { useProduct } from '../hooks/useProduct'
-import { useCart } from '../hooks/useCart'
-import { navigate } from 'gatsby'
-import { useCallback } from 'react'
+import { toDollar } from '../utils/utilFunctions'
+import useCart from '../hooks/useCart'
 
-const DetailContainer = ({ params }) => {
-    const product = useProduct(params.pid)
+const DetailContainer = ({ product }) => {
     const { addToCart } = useCart()
     const [quantity, setQuantity] = useState(1)
 
@@ -23,11 +20,6 @@ const DetailContainer = ({ params }) => {
             setQuantity(quantity - 1)
         }
     }
-
-    const productImgUrl = getSafe(() => product.image.publicUrl, '')
-    const productTitle = getSafe(() => product.title, '')
-    const productDescription = getSafe(() => product.description, '')
-    const productPrice = getSafe(() => product.price, 0)
 
     const handleAddToCart = useCallback(() => {
         addToCart(product, quantity)
@@ -40,15 +32,17 @@ const DetailContainer = ({ params }) => {
                 <Columns centered>
                     <Columns.Column className="is-4">
                         <img
-                            src={productImgUrl}
-                            alt={`${productTitle} image`}
+                            src={product.image}
+                            alt={`${product.name} image`}
                         />
                     </Columns.Column>
                     <Columns.Column className="is-4">
-                        <h2 className="title is-2">{productTitle}</h2>
+                        <h2 className="title is-2">{product.name}</h2>
                         <Panel>
-                            <Panel.Block>{productDescription}</Panel.Block>
-                            <Panel.Block>{toDollar(productPrice)}</Panel.Block>
+                            <Panel.Block>{product.description}</Panel.Block>
+                            <Panel.Block>
+                                {toDollar(product.price / 100)}
+                            </Panel.Block>
                         </Panel>
                         <div className="field has-addons">
                             <div className="control">
