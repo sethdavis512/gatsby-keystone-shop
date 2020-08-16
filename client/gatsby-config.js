@@ -1,7 +1,11 @@
+require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`
+})
+
 module.exports = {
     siteMetadata: {
-        title: `Gatsby Default Starter`,
-        description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+        title: `GKS`,
+        description: `An e-commerce site built with Gatsby, Keystone, and Stripe.`,
         author: `@gatsbyjs`,
         menuLinks: [
             { label: 'About', url: '/about' },
@@ -39,6 +43,15 @@ module.exports = {
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
         // `gatsby-plugin-offline`,
-        `gatsby-plugin-sass`
+        `gatsby-plugin-sass`,
+        `gatsby-plugin-stripe`,
+        {
+            resolve: `gatsby-source-stripe`,
+            options: {
+                objects: ['Price'],
+                secretKey: process.env.GATSBY_STRIPE_KEY,
+                downloadFiles: true
+            }
+        }
     ]
 }
