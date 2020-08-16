@@ -52,8 +52,8 @@ const CartContainer = ({ stripePromise }) => {
         const { error } = await stripe.redirectToCheckout({
             lineItems,
             mode: 'payment',
-            successUrl: 'http://localhost:8000/success',
-            cancelUrl: 'http://localhost:8000/cancel'
+            successUrl: `${window.location.origin}/success`,
+            cancelUrl: `${window.location.origin}/cancel`
         })
     }
 
