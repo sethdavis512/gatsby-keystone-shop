@@ -53,8 +53,7 @@ module.exports = {
             fallback: 'client/public/index.html'
         }),
         new AdminUIApp({
-            enableDefaultRoute: true,
-            authStrategy
+            // authStrategy
         })
     ],
     configureExpress: app => {

@@ -15,30 +15,38 @@ const ShopContainer = () => {
 
     const mappedCards =
         products &&
-        products.map(product => (
-            <Link to={`/product/${kebabCase(product.name)}`}>
-                <Card key={`product-key-${kebabCase(product.name)}`}>
-                    <Card.Image
-                        src={
-                            product.image ? product.image.publicUrl : undefined
-                        }
-                    />
-                    <Card.Content
-                        title={product.name}
-                        description={product.description}
-                        price={product.price}
-                    />
-                    <div className="card-footer">
-                        <div className="card-footer-item">
-                            <Button
-                                className="is-fullwidth"
-                                text="See Details"
+        products.map(product => {
+            if (product.active) {
+                return (
+                    <Link to={`/product/${kebabCase(product.name)}`}>
+                        <Card key={`product-key-${kebabCase(product.name)}`}>
+                            <Card.Image
+                                src={
+                                    product.image
+                                        ? product.image.publicUrl
+                                        : undefined
+                                }
                             />
-                        </div>
-                    </div>
-                </Card>
-            </Link>
-        ))
+                            <Card.Content
+                                title={product.name}
+                                description={product.description}
+                                price={product.price}
+                            />
+                            <div className="card-footer">
+                                <div className="card-footer-item">
+                                    <Button
+                                        className="is-fullwidth"
+                                        text="See Details"
+                                    />
+                                </div>
+                            </div>
+                        </Card>
+                    </Link>
+                )
+            } else {
+                return null
+            }
+        })
 
     const mappedColumns =
         mappedCards &&

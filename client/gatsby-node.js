@@ -12,11 +12,11 @@ exports.createPages = async ({ graphql, actions }) => {
             allStripePrice {
                 edges {
                     node {
+                        active
                         id
                         unit_amount
                         currency
                         product {
-                            id
                             name
                             description
                         }
@@ -27,18 +27,22 @@ exports.createPages = async ({ graphql, actions }) => {
     `)
 
     result.data.allStripePrice.edges.forEach(edge => {
-        const { product, unit_amount, id: nodeId } = edge.node
-        createPage({
-            path: `/product/${kebabCase(edge.node.product.name)}`,
-            component: require.resolve('./src/pages/shop/detail.tsx'),
-            context: {
-                product: {
-                    id: nodeId,
-                    name: product.name,
-                    description: product.description,
-                    price: unit_amount
+        const { active, product, unit_amount: price, id } = edge.node
+        const { description, name } = product
+
+        if (active) {
+            createPage({
+                path: `/product/${kebabCase(name)}`,
+                component: require.resolve('./src/pages/shop/detail.tsx'),
+                context: {
+                    product: {
+                        id,
+                        name,
+                        description,
+                        price
+                    }
                 }
-            }
-        })
+            })
+        }
     })
 }

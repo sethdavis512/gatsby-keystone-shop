@@ -6,12 +6,11 @@ const useProducts = () => {
             allStripePrice {
                 edges {
                     node {
+                        active
                         id
                         unit_amount
                         currency
                         product {
-                            active
-                            id
                             name
                             description
                         }
@@ -22,6 +21,7 @@ const useProducts = () => {
     `)
 
     const products = data.allStripePrice.edges.map(edge => ({
+        active: edge.node.active,
         id: edge.node.id,
         name: edge.node.product.name,
         description: edge.node.product.description,
